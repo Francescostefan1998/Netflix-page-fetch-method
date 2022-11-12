@@ -473,7 +473,8 @@
           movieElement.classList.add("col-md-2");
           movieElement.innerHTML = `<img src="${movie.imageUrl}" class="movie-cover" onclick="viewDetails(event)">
           <div>${movie._id}</div>
-      `;
+        <a href="details.html?moviesId=${movie._id}">VIEW DETAILS</a>`;
+
           list.appendChild(movieElement);
         });
       }
@@ -489,7 +490,7 @@
           const movieElement = document.createElement("div");
           movieElement.classList.add("col-md-2");
           movieElement.innerHTML = `<img src="${movie.imageUrl}" class="movie-cover" onclick="viewDetails(event)"> <div>${movie._id}</div>
-      `;
+        <a href="details.html?moviesId=${movie._id}">VIEW DETAILS</a>`;
 
           list2.appendChild(movieElement);
         });
@@ -524,7 +525,8 @@
           const movieElement2 = document.createElement("div");
           movieElement2.classList.add("col-md-2");
           movieElement2.innerHTML = `<img src="${movie2.imageUrl}" class="movie-cover" onclick="viewDetails(event)"> <div>${movie2._id}</div>
-      `;
+        <a href="details.html?moviesId=${movie2._id}">VIEW DETAILS</a>`;
+
           list.appendChild(movieElement2);
         });
       }
@@ -541,7 +543,8 @@
           const movieElement2 = document.createElement("div");
           movieElement2.classList.add("col-md-2");
           movieElement2.innerHTML = `<img src="${movie2.imageUrl}" class="movie-cover" onclick="viewDetails(event)"> <div>${movie2._id}</div>
-      `;
+
+        <a href="details.html?moviesId=${movie2._id}">VIEW DETAILS</a>`;
 
           list2.appendChild(movieElement2);
         });
@@ -554,6 +557,8 @@
         const movies2 = await gmovies2();
         rendermovies2(movies2);
         rendermoviess2(movies2);
+        let response1 = 0;
+        //console.log(response1);
       };
       async function gmoviesselected(target) {
         const response = await fetch(
@@ -565,11 +570,15 @@
             },
           }
         );
+        //response1.innerText = response;
         console.log(target);
         console.log(response);
+        const innerresponse = response.url;
+        console.log(innerresponse);
+
         const moviesselected = await response.json();
         return moviesselected;
-        console.log(moviesselected);
+        console.log(moviesselected.url);
       }
 
       function rendermoviesselected(moviesselected) {
@@ -577,7 +586,7 @@
         console.log(list, moviesselected);
         // console.log(movieselected);
         list.innerHTML = `
-        <a class"nav-link" href="details.html?moviesId=${moviesselected._id}">VIEW DETAILS</a>`;
+        <a class"nav-link" href="details.html?moviesId=${moviesselected.url}">VIEW DETAILS</a>`;
         console.log(moviesselected.innerText);
       }
 
